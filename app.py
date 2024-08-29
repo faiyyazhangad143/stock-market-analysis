@@ -1,4 +1,3 @@
-
 import pandas as pd
 import streamlit as st
 from sklearn.model_selection import train_test_split
@@ -24,10 +23,13 @@ model.fit(X_train, y_train)
 # Create the Streamlit app
 st.title('Reliance Share Price Prediction')
 
-# Get user input
-day = st.number_input('Enter the day (1-31)', min_value=1, max_value=31)
-month = st.number_input('Enter the month (1-12)', min_value=1, max_value=12)
-year = st.number_input('Enter the year (2024-2029)', min_value=2024, max_value=2029)
+# Get user input using a date picker
+selected_date = st.date_input('Select a date', min_value=pd.to_datetime('2024-01-01'), max_value=pd.to_datetime('2029-12-31'))
+
+# Extract year, month, and day from the selected date
+year = selected_date.year
+month = selected_date.month
+day = selected_date.day
 
 # Predict the share price
 if st.button('Predict'):
